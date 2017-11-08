@@ -1,9 +1,7 @@
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-// name used twice
-
-const DataComponent = (ComposedComponent, url) =>
+export const DataComponentWrapper = (ComposedComponent, url) =>
     class DataComponent extends Component {
         constructor(props) {
             super(props);
@@ -15,7 +13,7 @@ const DataComponent = (ComposedComponent, url) =>
         }
 
         componentWillMount() {
-            this.setState({loading:true});
+            this.setState({ loading: true });
 
             fetch(url)
                 .then(response => response.json())
@@ -28,30 +26,9 @@ const DataComponent = (ComposedComponent, url) =>
 
         render() {
             return (
-                <div className="data-component">
-                    {(this.state.loading) ? <div>Loading...</div> : <ComposedComponent {...this.state} {...this.props} />}
+                <div>
+                    {this.state.loading ? <div>Loading</div> : <ComposedComponent {...this.state} {...this.props} />}
                 </div>
             )
         }
-    }
-
-
-export default DataComponent;
-
-// const PeopleList = ({data}) =>
-//     <ol className="people-list">
-//         {data.results.map((person, i) => {
-//             const {first, last} = person.name
-//             return <li key={i}>{first} {last}</li>
-//         })}
-//     </ol>
-
-// const RandomMeUsers = DataComponent(
-//                         PeopleList,
-//                         "https://randomuser.me/api?results=10"
-//                     )
-
-// render(
-//     <RandomMeUsers />,
-//     document.getElementById('react-container')
-// )
+    };
