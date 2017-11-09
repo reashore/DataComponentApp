@@ -22,6 +22,8 @@ export const DataComponentWrapper = (ComposedComponent, url) =>
                     loading: false,
                     data
                 }));
+
+            this.state.data.map((item, index) => console.log(index, item));
         }
 
         render() {
